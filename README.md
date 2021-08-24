@@ -9,3 +9,14 @@ Solved the content-type header triggered when sending a POST request in a high v
 ```
 ./main -p host:port
 ```
+
+# 源码解决方案
+将 ElasticHD/main/vendor/github.com/mattbaird/elastigo/lib/connection.go 目录下的第159行的代码
+```
+req.Header.Add("Accept", "application/json")
+```
+替换成下面的代码，即可源码运行
+```
+req.Header.Add("Accept", "*/*")
+req.Header.Add("Content-Type", "application/json")
+```
